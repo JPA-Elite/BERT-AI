@@ -15,4 +15,4 @@ def predict(text: str):
     pred = int(np.argmax(probs))
     return {"label": pred, "prob_not": probs[0], "prob_harassment": probs[1]}
 
-print(predict("She harass me me"))
+print(predict("she chatted me offensive messages"))

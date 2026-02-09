@@ -7,15 +7,18 @@ from transformers import (
 )
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 import random
-from data.harassment import harassment_texts
-from data.non_harassment import non_harassment_texts
+from utils.utils import generate_harassments, generate_non_harassments
 
 
-harassment_texts = harassment_texts[:len(harassment_texts)]
-non_harassment_texts = non_harassment_texts[:len(non_harassment_texts)]
+harassment_texts = generate_harassments()
+non_harassment_texts = generate_non_harassments()
+
+n = min(len(harassment_texts), len(non_harassment_texts))
+harassment_texts = harassment_texts[:n]
+non_harassment_texts = non_harassment_texts[:n]
 
 texts = harassment_texts + non_harassment_texts
-labels = [1] * len(harassment_texts) + [0] * len(non_harassment_texts)
+labels = [1] * n + [0] * n
 
 # Shuffle dataset
 combined = list(zip(texts, labels))
